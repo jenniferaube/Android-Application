@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jennifer.finalproject.MainActivity">
+
+    <Button
+        android:id="@+id/activityButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="24dp"
+        android:text="Activity Tracker" />
+
+    <Button
+        android:id="@+id/nutritionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/activityButton"
+        android:layout_below="@+id/activityButton"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="56dp"
+        android:text="Food and Nutrition Tracker" />
+
+    <Button
+        android:id="@+id/houseThermoStatButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nutritionButton"
+        android:layout_marginTop="32dp"
+        android:text="House Thermostat" />
+
+    <Button
+        android:id="@+id/automobileButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/activityButton"
+        android:layout_below="@+id/houseThermoStatButton"
+        android:layout_marginTop="41dp"
+        android:text="Automobile" />
+</RelativeLayout>
