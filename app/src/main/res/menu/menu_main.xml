@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <item
+        android:id="@+id/action_thermostat"
+        android:title="House Thermostat"
+        android:icon="@drawable/thermostat"
+        android:orderInCategory="101"
+        app:showAsAction="always"></item>
+    <item
+        android:id="@+id/action_tracking"
+        android:title="Activity Tracker"
+        android:icon="@drawable/activitytracker"
+        android:orderInCategory="102"
+        app:showAsAction="always"></item>
+    <item
+        android:id="@+id/action_nutrition"
+        android:title="Food Nutrition information tracker"
+        android:icon="@drawable/nutrition"
+        android:orderInCategory="103"
+        app:showAsAction="always"></item>
+    <item
+        android:id="@+id/action_automobile"
+        android:title="Automobile"
+        android:icon="@drawable/automobile"
+        android:orderInCategory="104"
+        app:showAsAction="always"></item>
+
+</menu>

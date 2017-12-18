@@ -1,0 +1,16 @@
+<resources>
+<style name="AppTheme"/>
+    <style name="AppThemeToolBar" parent="Theme.AppCompat.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">#ed1717</item>
+        <item name="colorPrimaryDark">#0c0909</item>
+        <item name="colorAccent">#FFAB40</item>
+    </style>
+    <style name="AppThemeMainMenu" parent="Theme.AppCompat.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">#ed1717</item>
+        <item name="colorPrimaryDark">#ffffff</item>
+        <item name="colorAccent">#FFAB40</item>
+    </style>
+
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_home"
+        android:title="Home"
+        android:orderInCategory="100"
+        android:showAsAction="always"></item>
+    <item
+        android:id="@+id/action_add"
+        android:title="Add"
+        android:orderInCategory="110"
+        android:showAsAction="always"></item>
+    <item
+        android:id="@+id/action_instructions"
+        android:title="Instructions"
+        android:orderInCategory="120"
+        android:showAsAction="always"></item>
+    <item
+        android:id="@+id/action_help"
+        android:title="Help"
+        android:orderInCategory="130"
+        android:showAsAction="always"></item>
+</menu>

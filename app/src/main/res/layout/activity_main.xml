@@ -4,42 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/coordinatorLayout"
     tools:context="com.example.jennifer.finalproject.MainActivity">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+    </android.support.design.widget.AppBarLayout>
 
-    <Button
-        android:id="@+id/activityButton"
-        android:layout_width="wrap_content"
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="24dp"
-        android:text="Activity Tracker" />
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="16dp"
+        android:text="Automobile Activity By Krishnaveni Pillai"
+        android:id="@+id/textView8" />
 
-    <Button
-        android:id="@+id/nutritionButton"
-        android:layout_width="wrap_content"
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/activityButton"
-        android:layout_below="@+id/activityButton"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="56dp"
-        android:text="Food and Nutrition Tracker" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView8"
+        android:layout_marginTop="14dp"
+        android:text="Food Nutrition Activity by Adrianne Huang"
+        android:id="@+id/textView9" />
 
-    <Button
-        android:id="@+id/houseThermoStatButton"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/nutritionButton"
-        android:layout_marginTop="32dp"
-        android:text="House Thermostat" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView9"
+        android:layout_marginTop="19dp"
+        android:text="Activity Tracker by Gurleen Pannu" />
 
-    <Button
-        android:id="@+id/automobileButton"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/activityButton"
-        android:layout_below="@+id/houseThermoStatButton"
-        android:layout_marginTop="41dp"
-        android:text="Automobile" />
+        android:layout_marginTop="17dp"
+        android:text="House Thermostat by Jennifer Aube"
+        android:layout_below="@+id/textView6"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appBarLayout"
+        android:layout_marginTop="27dp"
+        android:text="CST2335 Final Project"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/colorAccent"
+        android:visibility="visible" />
+
 </RelativeLayout>
