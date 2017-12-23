@@ -9,7 +9,7 @@ import android.util.Log;
  * Created by Jennifer on 2017-12-06.
  */
 
-class DatabaseHelper extends SQLiteOpenHelper {
+class Database extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Alarm.db";
     public static int VERSION_NUM = 1;
     static final String name = "ALARM_TABLE";
@@ -20,9 +20,9 @@ class DatabaseHelper extends SQLiteOpenHelper {
     static final String KEY_TYPE = "type";
     SQLiteDatabase db;
     private static final String CREATE_TABLE_MSG = "create table " + name + "(" + KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT, "  +
-        KEY_DAY + " text, " + KEY_TIME + " text, " + KEY_TEMP + " text, " + KEY_TYPE + " text);";
+            KEY_DAY + " text, " + KEY_TIME + " text, " + KEY_TEMP + " text, " + KEY_TYPE + " text);";
 
-    public DatabaseHelper(Context context) {
+    public Database(Context context) {
         super(context, DATABASE_NAME, null, VERSION_NUM);
     }
     @Override

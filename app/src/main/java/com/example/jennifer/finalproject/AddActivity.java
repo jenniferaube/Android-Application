@@ -1,155 +1,151 @@
  package com.example.jennifer.finalproject;
 
- import android.app.Activity;
+ import android.app.Dialog;
+ import android.app.DialogFragment;
  import android.content.ContentValues;
  import android.content.Context;
- import android.database.Cursor;
+ import android.content.DialogInterface;
  import android.database.sqlite.SQLiteDatabase;
  import android.os.AsyncTask;
  import android.os.Bundle;
+ import android.support.v7.app.AlertDialog;
+ import android.support.v7.app.AppCompatActivity;
  import android.util.Log;
  import android.view.View;
- import android.view.ViewGroup;
- import android.widget.ArrayAdapter;
  import android.widget.Button;
  import android.widget.EditText;
  import android.widget.ProgressBar;
+ import android.widget.RadioButton;
+ import android.widget.Spinner;
+ import android.widget.TextView;
  import android.widget.Toast;
- import android.support.design.widget.Snackbar;
 
  import java.util.ArrayList;
 
- public class AddActivity extends Activity {
+ /**
+  * The following code is cited from
+  * https://android--examples.blogspot.ca/2015/04/timepickerdialog-in-android.html
+  */
+ public class AddActivity extends AppCompatActivity {
      ProgressBar bar;
-     EditText day;
-     EditText time;
+     TextView time;
      EditText temperature;
-     Button save;
-     Button saveAs;
-
+     Button add;
      ArrayList<String> list = new ArrayList<String>();
-     ArrayAdapter adapter;
-     ChatAdapter messageAdapter;
      private static SQLiteDatabase chatDatabase;
-     Cursor cursor;
-     DatabaseHelper helper;
-
+     Database helper;
+     String mday, mtime, mtemp, tempType;
+     ContentValues cv;
+     Spinner daySpinner;
      View view;
+     RadioButton celsius, farenheit;
+     AlertDialog.Builder builder;
+     String spinnerDefault;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         Log.i("AddActivity", "In onCreate()");
 
-        view = (View)findViewById(R.layout.activity_add);
         bar = (ProgressBar)findViewById(R.id.progressBar);
         bar.setVisibility(View.INVISIBLE);
 
-        day = (EditText)findViewById(R.id.dayOfWeek);
-        time = (EditText)findViewById(R.id.time);
-        temperature = (EditText)findViewById(R.id.temperature);
+        celsius = (RadioButton)findViewById(R.id.celsiusButton);
+        farenheit = (RadioButton) findViewById(R.id.farenheitButton);
 
-        save = (Button)findViewById(R.id.saveButton);
-        saveAs = (Button)findViewById(R.id.saveAsButton);
+        if(celsius.isChecked()){
+            tempType = "\u2103";
 
-        messageAdapter = new ChatAdapter(this);
+        }
+        if(farenheit.isChecked()){
+            tempType = "\u2109";
+
+        }
+        time = (TextView)findViewById(R.id.timeTxtView);
+        temperature = (EditText)findViewById(R.id.temperatureEditView);
+
+        add = (Button)findViewById(R.id.saveButton);
+        daySpinner = (Spinner)findViewById(R.id.spinnerEditMode);
+        time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // time.setText("");
+                DialogFragment newFragment = new TimePickerFragment();
+                newFragment.show(getFragmentManager(),"TimePicker");
+            }
+        });
         Context context = getApplicationContext();
-        helper = new DatabaseHelper(context);
+        helper = new Database(context);
         chatDatabase = helper.getWritableDatabase();
-        final ContentValues cv = new ContentValues();
+        cv = new ContentValues();
 
-        save.setOnClickListener(new View.OnClickListener() {
+        builder = new AlertDialog.Builder(this);
+
+        add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //goes in the edit activity
-                Snackbar snackbar = Snackbar.make(view, "Your message was succesfully saved.", Snackbar.LENGTH_SHORT);
-                snackbar.show();
+                spinnerDefault = daySpinner.getSelectedItem().toString();
+                if(spinnerDefault.equals("Select a day")){
+                    builder.setTitle("Must make a selection");
+                    builder.setMessage("You must select a day.");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            //close this dialog and return to activity to make the selection to add the alarm
+                        }
+                    });
+
+                    Dialog customDialog = builder.create();
+                    customDialog.show();
+                }else {
+                    bar.setVisibility(View.VISIBLE);
+                    bar.setProgress(0);
+                    mday = daySpinner.getSelectedItem().toString();
+                    mtime = time.getText().toString();
+                    mtemp = temperature.getText().toString();
+                    AddQuery addQuery = new AddQuery();
+                    addQuery.execute(mday, mtime, mtemp, tempType);
+                }
             }
         });
-        saveAs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String mday = day.getText().toString();
-                String mtime = time.getText().toString();
-                String mtemp = temperature.getText().toString();
-                list.add(mday);
-                list.add(mtime);
-                list.add(mtemp);
-
-                Log.i("List", String.valueOf(list));
-                messageAdapter.notifyDataSetChanged();
-                cv.put("day", mday);
-                cv.put("time", mtime);
-                cv.put("temperature", mtemp);
-                chatDatabase.insert(DatabaseHelper.name, null, cv);
-
-                Toast toast = Toast.makeText(AddActivity.this, "You have successfully saved your alert", Toast.LENGTH_SHORT);
-                toast.show();
-                finish();
-            }
-        });
-
     }
-     class ChatAdapter extends ArrayAdapter<String> {
-         public ChatAdapter(Context ctx) {
-
-             super(ctx, 0);
-         }
-
-         public long getItemID(int position) {
-             return position;
-         }
-
-         public int getCount() {
-             return list.size();
-         }
-
-         public String getItem(int position) {
-             return list.get(position);
-         }
-
-         public View getView(int position, View convertView, ViewGroup parent) {
-             LayoutInflater inflater = ChatWindow.this.getLayoutInflater();
-             View result = null ;
-             if(position%2 == 0) {
-                 result = inflater.inflate(R.layout.chat_row_incoming, null);
-             }else {
-                 result = inflater.inflate(R.layout.chat_row_outgoing, null);
-             }
-             TextView message = (TextView)result.findViewById(R.id.messageText);
-             message.setText(getItem(position)  ); // get the string at position
-             return result;
-             return null;
-         }
-     }
-
-         class AddQuery extends AsyncTask<Object, Object, Cursor> {
-             DatabaseHelper helper = new DatabaseHelper(getApplicationContext());
-             SQLiteDatabase db;
-             String day;
-             String time;
-             String temp;
+         class AddQuery extends AsyncTask<String, Integer, String> {
+             Database helper = new Database(getApplicationContext());
 
              @Override
-             protected Cursor doInBackground(Object... params) {
+             protected String doInBackground(String... params) {
                  Log.i("AddActivity", "In doInBackground()");
-                 helper.onOpen(db);
+                 publishProgress(20);
+                 helper.onOpen(chatDatabase);
+                 publishProgress(40);
+                 list.add(params[0]);
+                 publishProgress(60);
+                 list.add(params[1]);
+                 publishProgress(80);
+                 list.add(params[2]);
+                 list.add(params[3]);
+
+                 cv.put("day", params[0]);
+                 cv.put("time", params[1]);
+                 cv.put("temperature", params[2]);
+                 cv.put("type", params[3]);
+                 chatDatabase.insert(Database.name, null, cv);
+                 publishProgress(100);
                  return null;
              }
-
              @Override
-             protected void onProgressUpdate(Object... value) {
-
-                 bar.setVisibility(View.VISIBLE);
-                 //bar.setProgress(value[0]);
-
+             protected void onProgressUpdate(Integer... value) {
                  Log.i("AddActivity", "In onProgressUpdate");
+                 bar.setProgress(value[0]);
              }
-
              @Override
-             public void onPostExecute(Cursor result) {
+             public void onPostExecute(String result) {
                  Log.i("AddActivity", "In onPostExecute()");
-                 //add elements to database
+                 bar.setVisibility(View.INVISIBLE);
+                 Toast toast = Toast.makeText(AddActivity.this, "You have successfully saved your alert", Toast.LENGTH_SHORT);
+                 toast.show();
+                 finish();
              }
          }
 

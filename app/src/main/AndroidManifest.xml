@@ -20,8 +20,8 @@
         <activity
             android:name=".HouseThermostatActivity"
             android:theme="@style/AppThemeToolBar" />
-        <activity android:name=".AddActivity" android:theme="@style/AppThemeToolBar"/>
-        <activity android:name=".EditActivity" />
+        <activity android:name=".AddActivity" android:theme="@style/AppThemeToolBar" android:label="Add"/>
+        <activity android:name=".EditActivity" android:label="Edit" android:theme="@style/Theme.AppCompat.Light"/>
         <activity android:name=".InstructionActivity" ></activity>
     </application>
 

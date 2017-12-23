@@ -7,77 +7,85 @@
     tools:context="com.example.jennifer.finalproject.AddActivity">
 
     <EditText
-        android:id="@+id/dayOfWeek"
-        android:layout_width="match_parent"
+        android:id="@+id/temperatureEditView"
+        android:layout_width="275dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/weekDayTextView"
-        android:inputType="text|date" />
-
-    <EditText
-        android:id="@+id/time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/timeTextView"
-        android:inputType="time" />
-
-    <EditText
-        android:id="@+id/temperature"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/temperatureTextView"
+        android:layout_below="@+id/tempTxtView"
+        android:layout_marginTop="12dp"
         android:inputType="number" />
 
     <Button
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:icon="@drawable/add"
+        android:text="Add"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/temperature"
-        android:text="Save" />
+        android:layout_alignParentEnd="true" />
 
     <TextView
-        android:id="@+id/weekDayTextView"
+        android:id="@+id/tempTxtView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter a day of the week"
-        android:layout_marginTop="27dp"
-        android:layout_alignParentTop="true"
+        android:layout_marginTop="21dp"
+        android:text=" Enter a Temperature"
+        android:layout_below="@+id/timeTxtView"
         android:layout_alignParentStart="true" />
-
-    <TextView
-        android:id="@+id/timeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enter a time"
-        android:layout_below="@+id/dayOfWeek"
-        android:layout_alignStart="@+id/temperatureTextView" />
-
-    <TextView
-        android:id="@+id/temperatureTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enter a Temperature"
-        android:layout_below="@+id/time"
-        android:layout_alignStart="@+id/weekDayTextView" />
-
-    <Button
-        android:id="@+id/saveAsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/saveButton"
-        android:text="Save As" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/temperature"
+        android:layout_below="@+id/temperatureEditView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="66dp" />
+
+    <TextView
+        android:id="@+id/timeTxtView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="27dp"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:text=" Select a time"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:layout_below="@+id/spinnerEditMode"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:id="@+id/spinnerEditMode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:prompt="@string/dayPrompt"
+        android:entries="@array/dayOfWeek"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="11dp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignTop="@+id/temperatureEditView"
+        android:layout_toEndOf="@+id/temperatureEditView"
+        android:layout_alignStart="@+id/saveButton">
+
+        <RadioButton
+            android:id="@+id/celsiusButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="\u2103" />
+
+        <RadioButton
+            android:id="@+id/farenheitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="\u2109" />
+    </RadioGroup>
 
 </RelativeLayout>

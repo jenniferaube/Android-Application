@@ -9,7 +9,7 @@
     <style name="AppThemeMainMenu" parent="Theme.AppCompat.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">#ed1717</item>
-        <item name="colorPrimaryDark">#ffffff</item>
+        <item name="colorPrimaryDark">#0c6474</item>
         <item name="colorAccent">#FFAB40</item>
     </style>
 

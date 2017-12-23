@@ -23,23 +23,24 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
 import java.util.ArrayList;
 
 public class HouseThermostatActivity extends AppCompatActivity {
     public static java.lang.String DAY = "dayofweek";
     public static java.lang.String TIME = "time";
     public static java.lang.String TEMP = "temperature";
+    public static java.lang.String TYPE = "type";
     String ACTIVITY_NAME = "HouseThermostatActivity";
     public static java.lang.String ID = "ID";
     Toolbar toolbar;
     private static SQLiteDatabase chatDatabase;
     Cursor cursor;
     Context context;
-    DatabaseHelper helper;
+    Database helper;
     ArrayList<String> listDay = new ArrayList<String>();
     ArrayList<String> listTime = new ArrayList<String>();
     ArrayList<String> listTemp = new ArrayList<String>();
+    ArrayList<String> listType = new ArrayList<>();
     ThermostatAdapter thermostatAdapter;
     ListView listView;
 
@@ -55,19 +56,20 @@ public class HouseThermostatActivity extends AppCompatActivity {
         thermostatAdapter = new ThermostatAdapter(this);
         listView.setAdapter(thermostatAdapter);
         context = getApplicationContext();
-        helper = new DatabaseHelper(context);
+        helper = new Database(context);
         chatDatabase = helper.getWritableDatabase();
         final ContentValues cv = new ContentValues();
-        cursor = chatDatabase.query(DatabaseHelper.name, new String[]{DatabaseHelper.KEY_ID, DatabaseHelper.KEY_DAY,  DatabaseHelper.KEY_TIME, DatabaseHelper.KEY_TEMP}, null, null, null, null, null);
+        cursor = chatDatabase.query(Database.name, new String[]{Database.KEY_ID, Database.KEY_DAY,  Database.KEY_TIME, Database.KEY_TEMP, Database.KEY_TYPE}, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             do {
-                String day = cursor.getString(cursor.getColumnIndex(DatabaseHelper.KEY_DAY));
+                String day = cursor.getString(cursor.getColumnIndex(Database.KEY_DAY));
                 listDay.add(day);
-                String time = cursor.getString(cursor.getColumnIndex(DatabaseHelper.KEY_TIME));
+                String time = cursor.getString(cursor.getColumnIndex(Database.KEY_TIME));
                 listTime.add(time);
-                String temp = cursor.getString(cursor.getColumnIndex(DatabaseHelper.KEY_TEMP));
+                String temp = cursor.getString(cursor.getColumnIndex(Database.KEY_TEMP));
                 listTemp.add(temp);
-                //Log.i("HouseThermostatActivity", String.valueOf(list));
+                String type = cursor.getString(cursor.getColumnIndex(Database.KEY_TYPE));
+                listType.add(type);
                 cursor.moveToNext();
             } while (!cursor.isAfterLast());
         }
@@ -83,40 +85,22 @@ public class HouseThermostatActivity extends AppCompatActivity {
                 //user clicks on alarm use the id to pass to the editActivity to open the database and get all the info
                 Bundle bundle = new Bundle();
                 cursor.moveToPosition(position);
-                bundle.putString(ID, cursor.getString(cursor.getColumnIndex(DatabaseHelper.KEY_ID)));
-                bundle.putString(DAY, cursor.getString(cursor.getColumnIndex(DatabaseHelper.KEY_DAY)));
-                bundle.putString(TIME, cursor.getString(cursor.getColumnIndex(DatabaseHelper.KEY_TIME)));
-                bundle.putString(TEMP, cursor.getString(cursor.getColumnIndex(DatabaseHelper.KEY_TEMP)));
+                bundle.putString(ID, cursor.getString(cursor.getColumnIndex(Database.KEY_ID)));
+                bundle.putString(DAY, cursor.getString(cursor.getColumnIndex(Database.KEY_DAY)));
+                bundle.putString(TIME, cursor.getString(cursor.getColumnIndex(Database.KEY_TIME)));
+                bundle.putString(TEMP, cursor.getString(cursor.getColumnIndex(Database.KEY_TEMP)));
+                bundle.putString(TYPE, cursor.getString(cursor.getColumnIndex(Database.KEY_TYPE)));
                 Intent editIntent = new Intent(HouseThermostatActivity.this, EditActivity.class);
                 editIntent.putExtras(bundle);
                 startActivityForResult(editIntent, 2);
             }
         });
     }
-   /* public void onMessageSelected(Context c, int position){
-        helper = new DatabaseHelper(c);
-        chatDatabase = helper.getWritableDatabase();
-        String [] args={String.valueOf(position)};
-        chatDatabase.delete(DatabaseHelper.name, DatabaseHelper.KEY_ID + "=?", args);
-
-        Log.i(ACTIVITY_NAME, "In onMessageSelected");
-    }*/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.i(ACTIVITY_NAME, "In onActivityResult");
-        Log.i(ACTIVITY_NAME, "resultcode " + resultCode + " request code " + requestCode);
-        Log.i(ACTIVITY_NAME, "listday " + listDay + " listtime " + listTime + " listtemp " + listTemp);
-       /* listDay.remove(resultCode);
-        listTime.remove(resultCode);
-        listTemp.remove(resultCode);*/
-        /*thermostatAdapter = new ThermostatAdapter(this);
-        listView.setAdapter(thermostatAdapter);*/
-        Log.i(ACTIVITY_NAME, "listday " + listDay + " listtime " + listTime + " listtemp " + listTemp);
         startActivity(getIntent());
-
-
-
     }
     class ThermostatAdapter extends ArrayAdapter<String> {
 
@@ -131,7 +115,6 @@ public class HouseThermostatActivity extends AppCompatActivity {
             return listDay.size();
         }
         public String getItem(int position){
-            Log.i("list", String.valueOf(listDay) );
             return listDay.get(position);
         }
         public View getView(int position, View view, ViewGroup parent){
@@ -141,23 +124,23 @@ public class HouseThermostatActivity extends AppCompatActivity {
                 view = mInflater.inflate(R.layout.alarm_list, null);
                 viewHolder = new ViewHolder();
                 viewHolder.textViewDay = (TextView) view.findViewById(R.id.dayOfWeekTextView);
-                viewHolder.textViewTime = (TextView) view.findViewById(R.id.timeTextView);
+                viewHolder.textViewTime = (TextView) view.findViewById(R.id.timeTxtView);
                 viewHolder.textViewTemp = (TextView) view.findViewById(R.id.tempTextView);
+                viewHolder.textViewType = (TextView) view.findViewById(R.id.typeTextView);
                 view.setTag(viewHolder);
                 if (position %2 ==0) {
                     view.setBackgroundColor(Color.LTGRAY);
                 }else{
                     view.setBackgroundColor(Color.WHITE);
                 }
-
             }else{
                 viewHolder = (ViewHolder) view.getTag();
             }
 
                 viewHolder.textViewDay.setText(listDay.get(position));
                 viewHolder.textViewTime.setText(listTime.get(position));
-                viewHolder.textViewTemp.setText(listTemp.get(position) + "\u2103");
-            Log.i(ACTIVITY_NAME, "In ViewHolder: listday " + listDay + " listtime " + listTime + " listtemp " + listTemp);
+                viewHolder.textViewTemp.setText(listTemp.get(position));
+                viewHolder.textViewType.setText(listType.get(position));
 
             return view;
         }
@@ -182,7 +165,7 @@ public class HouseThermostatActivity extends AppCompatActivity {
                 return true;
             case R.id.action_help:
                 //dialog notification
-                int version = DatabaseHelper.VERSION_NUM;
+                int version = Database.VERSION_NUM;
                 final AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Do you want to go back");
                 builder.setMessage("Author: Jennifer Aube\nVersion: " + version + "\n\nClick on the 3 dots at the top of the page to open a menu to move around the app." +
@@ -205,6 +188,7 @@ public class HouseThermostatActivity extends AppCompatActivity {
         public TextView textViewDay;
         public TextView textViewTime;
         public TextView textViewTemp;
+        public TextView textViewType;
     }
 
 

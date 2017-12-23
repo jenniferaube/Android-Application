@@ -1,10 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.jennifer.finalproject.EditActivity">
+    android:background="@android:color/background_light"
+    tools:context="com.example.jennifer.finalproject.AddActivity">
 
-</FrameLayout>
+
+    <EditText
+        android:id="@+id/temperatureEditView"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tempTxtView"
+        android:layout_marginTop="12dp"
+        android:inputType="number" />
+
+
+    <TextView
+        android:id="@+id/tempTxtView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/timeTxtView"
+        android:layout_marginTop="21dp"
+        android:text=" Enter a Temperature" />
+
+    <ProgressBar
+        android:id="@+id/progressBarEdit"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/temperatureEditView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="66dp" />
+
+    <TextView
+        android:id="@+id/timeTxtView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/spinnerEditMode"
+        android:layout_marginTop="27dp"
+        android:clickable="true"
+        android:onClick="onClick"
+        android:text=" Select a time"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <Spinner
+        android:id="@+id/spinnerEditMode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="11dp"
+        android:entries="@array/dayOfWeek"
+        android:prompt="@string/dayPrompt" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignStart="@+id/deleteButton"
+        android:layout_alignTop="@+id/temperatureEditView">
+
+        <RadioButton
+            android:id="@+id/celsiusEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="\u2103" />
+
+        <RadioButton
+            android:id="@+id/farenheitEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="\u2109" />
+    </RadioGroup>
+
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/save" />
+
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/delete" />
+
+</RelativeLayout>
