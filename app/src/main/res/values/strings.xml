@@ -3,6 +3,34 @@
 
 
     <string name="dayPrompt">Select a day</string>
+    <string name="house_thermostat">House Thermostat</string>
+    <string name="activity_tracker">Activity Tracker</string>
+    <string name="food_nutrition_information_tracker">Food Nutrition information tracker</string>
+    <string name="automobile">Automobile</string>
+    <string name="home">Home</string>
+    <string name="add">Add</string>
+    <string name="instructions">Instructions</string>
+    <string name="help">Help</string>
+    <string name="select_a_time">Select a time</string>
+    <string name="enter_a_temperature">Enter a Temperature</string>
+    <string name="enter_a_temperature_add">Enter a Temperature</string>
+    <string name="select_a_time_add">Select a time</string>
+    <string name="instructions1">You can move around the app, by using the toolbar at the top to use the Home page, Add page, Instructions page, and Help Page.</string>
+    <string name="instructions2">Welcome to the House Thermostat Application</string>
+    <string name="instructions3">A toolbar at the top will allow you to move around the applcation.</string>
+    <string name="instructions4">In the main menu you can see your scheduled alarms.</string>
+    <string name="instructions5">By double clicking on a scheduled event will open an edit view.</string>
+    <string name="close">Close</string>
+    <string name="day_of_week">day of week</string>
+    <string name="time">time</string>
+    <string name="temperature">temperature</string>
+    <string name="type">Type</string>
+    <string name="automobile_activity">Automobile Activity By Krishnaveni Pillai</string>
+    <string name="food_nutrition_activity">Food Nutrition Activity by Adrianne Huang</string>
+    <string name="activity_tracker_main">Activity Tracker by Gurleen Pannu</string>
+    <string name="house_thermostat_main">House Thermostat by Jennifer Aubé</string>
+    <string name="cst2335_final_project">CST2335 Final Project</string>
+    <string name="edit">Edit</string>
     <string-array name="dayOfWeek">
         <item>Select a day</item>
         <item>Monday</item>

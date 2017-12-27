@@ -36,6 +36,7 @@ public class EditActivity extends AppCompatActivity {
     Spinner spinner;
     EditText temperature;
     TextView timeTxt, typeTxt;
+    RadioButton celsius, farenheit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +54,8 @@ public class EditActivity extends AppCompatActivity {
         ProgressBar progressBar = (ProgressBar)findViewById(R.id.progressBarEdit);
         progressBar.setVisibility(View.INVISIBLE);
 
-        RadioButton celsius = (RadioButton) findViewById(R.id.celsiusEdit);
-        RadioButton farenheit = (RadioButton) findViewById(R.id.farenheitEdit);
+        celsius = (RadioButton) findViewById(R.id.celsiusEdit);
+        farenheit = (RadioButton) findViewById(R.id.farenheitEdit);
         if(type.equals("\u2103")){
             celsius.setChecked(true);
             type = "\u2103";
@@ -106,6 +107,12 @@ public class EditActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(celsius.isChecked()){
+                    type = "\u2103";
+                }
+                if(farenheit.isChecked()){
+                    type = "\u2109";
+                }
                 //custom dialog box save or save as choice
                 builder.setTitle("How would you like to save?");
                 builder.setMessage("If you like to save the changes you made to this alarm, click save. \nIf you would like to keep the old alarm and save this one as new, click save as.");

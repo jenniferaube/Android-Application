@@ -54,14 +54,7 @@
         celsius = (RadioButton)findViewById(R.id.celsiusButton);
         farenheit = (RadioButton) findViewById(R.id.farenheitButton);
 
-        if(celsius.isChecked()){
-            tempType = "\u2103";
 
-        }
-        if(farenheit.isChecked()){
-            tempType = "\u2109";
-
-        }
         time = (TextView)findViewById(R.id.timeTxtView);
         temperature = (EditText)findViewById(R.id.temperatureEditView);
 
@@ -85,6 +78,14 @@
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(celsius.isChecked()){
+                    tempType = "\u2103";
+
+                }
+                if(farenheit.isChecked()){
+                    tempType = "\u2109";
+
+                }
                 spinnerDefault = daySpinner.getSelectedItem().toString();
                 if(spinnerDefault.equals("Select a day")){
                     builder.setTitle("Must make a selection");

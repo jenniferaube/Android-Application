@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar=(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu m){

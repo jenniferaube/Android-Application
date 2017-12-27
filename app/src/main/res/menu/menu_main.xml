@@ -6,25 +6,25 @@
 
     <item
         android:id="@+id/action_thermostat"
-        android:title="House Thermostat"
+        android:title="@string/house_thermostat"
         android:icon="@drawable/thermostat"
         android:orderInCategory="101"
         app:showAsAction="always"></item>
     <item
         android:id="@+id/action_tracking"
-        android:title="Activity Tracker"
+        android:title="@string/activity_tracker"
         android:icon="@drawable/activitytracker"
         android:orderInCategory="102"
         app:showAsAction="always"></item>
     <item
         android:id="@+id/action_nutrition"
-        android:title="Food Nutrition information tracker"
+        android:title="@string/food_nutrition_information_tracker"
         android:icon="@drawable/nutrition"
         android:orderInCategory="103"
         app:showAsAction="always"></item>
     <item
         android:id="@+id/action_automobile"
-        android:title="Automobile"
+        android:title="@string/automobile"
         android:icon="@drawable/automobile"
         android:orderInCategory="104"
         app:showAsAction="always"></item>

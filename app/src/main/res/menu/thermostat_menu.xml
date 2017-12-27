@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_home"
-        android:title="Home"
-        android:orderInCategory="100"
-        android:showAsAction="always"></item>
+        android:title="@string/home"
+        android:orderInCategory="101"
+        android:icon="@drawable/home"
+        app:showAsAction="always"></item>
     <item
         android:id="@+id/action_add"
-        android:title="Add"
-        android:orderInCategory="110"
-        android:showAsAction="always"></item>
+        android:title="@string/add"
+        android:orderInCategory="102"
+        android:icon="@drawable/add2"
+        app:showAsAction="always"></item>
     <item
         android:id="@+id/action_instructions"
-        android:title="Instructions"
-        android:orderInCategory="120"
-        android:showAsAction="always"></item>
+        android:title="@string/instructions"
+        android:orderInCategory="103"
+        android:icon="@drawable/instructions"
+        app:showAsAction="always"></item>
     <item
         android:id="@+id/action_help"
-        android:title="Help"
-        android:orderInCategory="130"
-        android:showAsAction="always"></item>
+        android:title="@string/help"
+        android:orderInCategory="104"
+        android:icon="@drawable/help"
+        app:showAsAction="ifRoom"></item>
 </menu>

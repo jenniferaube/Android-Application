@@ -155,7 +155,7 @@ public class HouseThermostatActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch(id){
             case R.id.action_home:
-                startActivity(new Intent(HouseThermostatActivity.this, HouseThermostatActivity.class));
+                startActivity(new Intent(HouseThermostatActivity.this, MainActivity.class));
                 return true;
             case R.id.action_add:
                 startActivityForResult(new Intent(HouseThermostatActivity.this, AddActivity.class), 1);
@@ -168,7 +168,7 @@ public class HouseThermostatActivity extends AppCompatActivity {
                 int version = Database.VERSION_NUM;
                 final AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("Do you want to go back");
-                builder.setMessage("Author: Jennifer Aube\nVersion: " + version + "\n\nClick on the 3 dots at the top of the page to open a menu to move around the app." +
+                builder.setMessage("Author: Jennifer Aube\nVersion: " + version + "\n\nIn the menu bar at the top of the page, you can move around the app" +
                         "\nCheck out the instructions page for how to use this app.");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override

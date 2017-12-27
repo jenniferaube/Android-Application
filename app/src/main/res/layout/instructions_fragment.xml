@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView2"
-        android:text="You can move to the Menu page, Add page, Instructions page, and Help Page."
+        android:text="@string/instructions1"
         android:textAppearance="@android:style/TextAppearance.Medium" />
 
     <TextView
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/holo_blue_light"
-        android:text="Welcome to the House Thermostat Application"
+        android:text="@string/instructions2"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textAppearance="@android:style/TextAppearance.Large"
@@ -29,7 +29,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="A toolbar at the top will allow you to move around the applcation."
+        android:text="@string/instructions3"
         android:textAppearance="@android:style/TextAppearance.Medium"
         android:layout_below="@+id/instructionsTextView"
         android:layout_alignParentStart="true" />
@@ -38,7 +38,7 @@
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="In the main menu you can see your scheduled alarms."
+        android:text="@string/instructions4"
         android:textAppearance="@android:style/TextAppearance.Medium"
         android:layout_marginTop="64dp"
         android:layout_below="@+id/textView2"
@@ -49,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="69dp"
-        android:text="By double clicking on a scheduled event will open an edit view."
+        android:text="@string/instructions5"
         android:textAppearance="@android:style/TextAppearance.Medium"
         android:layout_below="@+id/textView3"
         android:layout_alignParentStart="true" />
@@ -58,7 +58,7 @@
         android:id="@+id/closeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Close"
+        android:text="@string/close"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 </RelativeLayout>
