@@ -15,11 +15,13 @@
     <string name="enter_a_temperature">Enter a Temperature</string>
     <string name="enter_a_temperature_add">Enter a Temperature</string>
     <string name="select_a_time_add">Select a time</string>
+    <!--instructions1 if for help page-->
     <string name="instructions1">You can move around the app, by using the toolbar at the top to use the Home page, Add page, Instructions page, and Help Page.</string>
+    <!--instructions2-5 for instructions page-->
     <string name="instructions2">Welcome to the House Thermostat Application</string>
-    <string name="instructions3">A toolbar at the top will allow you to move around the applcation.</string>
-    <string name="instructions4">In the main menu you can see your scheduled alarms.</string>
-    <string name="instructions5">By double clicking on a scheduled event will open an edit view.</string>
+    <string name="instructions3">The toolbar at the top allows you to move around the application.</string>
+    <string name="instructions4">From the main page you can see your scheduled alarms.</string>
+    <string name="instructions5">By clicking on a scheduled event, a new screen appears for you to edit as you wish.</string>
     <string name="close">Close</string>
     <string name="day_of_week">day of week</string>
     <string name="time">time</string>

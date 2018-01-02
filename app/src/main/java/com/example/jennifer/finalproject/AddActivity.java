@@ -117,14 +117,15 @@
              @Override
              protected String doInBackground(String... params) {
                  Log.i("AddActivity", "In doInBackground()");
-                 publishProgress(20);
+                 publishProgress(15);
                  helper.onOpen(chatDatabase);
-                 publishProgress(40);
+                 publishProgress(30);
                  list.add(params[0]);
-                 publishProgress(60);
+                 publishProgress(45);
                  list.add(params[1]);
-                 publishProgress(80);
+                 publishProgress(60);
                  list.add(params[2]);
+                 publishProgress(85);
                  list.add(params[3]);
 
                  cv.put("day", params[0]);

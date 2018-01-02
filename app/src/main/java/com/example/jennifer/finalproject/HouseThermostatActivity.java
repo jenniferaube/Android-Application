@@ -166,8 +166,10 @@ public class HouseThermostatActivity extends AppCompatActivity {
             case R.id.action_help:
                 //dialog notification
                 int version = Database.VERSION_NUM;
+                /*Alert dialog was cited from
+                * https://developer.android.com/guide/topics/ui/dialogs.html*/
                 final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Do you want to go back");
+                builder.setTitle("Help");
                 builder.setMessage("Author: Jennifer Aube\nVersion: " + version + "\n\nIn the menu bar at the top of the page, you can move around the app" +
                         "\nCheck out the instructions page for how to use this app.");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
