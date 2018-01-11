@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -37,6 +38,8 @@ public class EditActivity extends AppCompatActivity {
     EditText temperature;
     TextView timeTxt, typeTxt;
     RadioButton celsius, farenheit;
+    ProgressBar bar;
+    RelativeLayout view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +54,8 @@ public class EditActivity extends AppCompatActivity {
         id = bundle.getString("ID");
         type = bundle.getString("type");
         resultCode = Integer.parseInt(id);
-        ProgressBar progressBar = (ProgressBar)findViewById(R.id.progressBarEdit);
-        progressBar.setVisibility(View.INVISIBLE);
+        bar = (ProgressBar)findViewById(R.id.progressBarEdit);
+        bar.setVisibility(View.INVISIBLE);
 
         celsius = (RadioButton) findViewById(R.id.celsiusEdit);
         farenheit = (RadioButton) findViewById(R.id.farenheitEdit);
@@ -89,17 +92,20 @@ public class EditActivity extends AppCompatActivity {
         });
         temperature = (EditText) findViewById(R.id.temperatureEditView);
         temperature.setText(temp);
-        final RelativeLayout view = (RelativeLayout) findViewById(R.id.relativeLayout);
+        view = (RelativeLayout) findViewById(R.id.relativeLayout);
         Button deleteButton = (Button)findViewById(R.id.deleteButton);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i(ACTIVITY_NAME, "delete button clicked");
-                onMessageSelected(resultCode);
+               /* onMessageSelected(resultCode);
                 Snackbar snackbar = Snackbar.make(view, "Your item has been deleted.", Snackbar.LENGTH_SHORT);
                 snackbar.show();
                 setResult(resultCode);
-                finish();
+                finish();*/
+               bar.setVisibility(View.VISIBLE);
+               DeleteQuery query = new DeleteQuery();
+               query.execute();
             }
         });
         Button saveButton = (Button)findViewById(R.id.saveButton);
@@ -113,6 +119,8 @@ public class EditActivity extends AppCompatActivity {
                 if(farenheit.isChecked()){
                     type = "\u2109";
                 }
+                bar.setVisibility(View.VISIBLE);
+
                 //custom dialog box save or save as choice
                 builder.setTitle("How would you like to save?");
                 builder.setMessage("If you like to save the changes you made to this alarm, click save. \nIf you would like to keep the old alarm and save this one as new, click save as.");
@@ -172,6 +180,42 @@ public class EditActivity extends AppCompatActivity {
         list.add(mTime);
         list.add(mTemp);
         list.add(mType);
+    }
+
+    class DeleteQuery extends AsyncTask<String, Integer, String> {
+        Database helper = new Database(getApplicationContext());
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                Log.i("EditActivity", "In doInBackground()");
+
+                publishProgress(30);
+                Thread.sleep(1000);
+                onMessageSelected(resultCode);
+                publishProgress(60);
+                Thread.sleep(1000);
+                setResult(resultCode);
+                publishProgress(90);
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+        @Override
+        protected void onProgressUpdate(Integer... value) {
+            Log.i("EditActivity", "In onProgressUpdate");
+            bar.setProgress(value[0]);
+        }
+        @Override
+        public void onPostExecute(String result) {
+            Log.i("EditActivity", "In onPostExecute()");
+            bar.setVisibility(View.INVISIBLE);
+            Snackbar snackbar = Snackbar.make(view, "Your item has been deleted.", Snackbar.LENGTH_SHORT);
+            snackbar.show();
+            finish();
+        }
     }
 }
 

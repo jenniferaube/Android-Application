@@ -116,16 +116,21 @@
 
              @Override
              protected String doInBackground(String... params) {
+                 try {
                  Log.i("AddActivity", "In doInBackground()");
                  publishProgress(15);
                  helper.onOpen(chatDatabase);
                  publishProgress(30);
+                    Thread.sleep(1000);
                  list.add(params[0]);
                  publishProgress(45);
+                     Thread.sleep(1000);
                  list.add(params[1]);
                  publishProgress(60);
+                     Thread.sleep(1000);
                  list.add(params[2]);
                  publishProgress(85);
+                     Thread.sleep(1000);
                  list.add(params[3]);
 
                  cv.put("day", params[0]);
@@ -134,6 +139,10 @@
                  cv.put("type", params[3]);
                  chatDatabase.insert(Database.name, null, cv);
                  publishProgress(100);
+                     Thread.sleep(1000);
+                 } catch (InterruptedException e) {
+                     e.printStackTrace();
+                 }
                  return null;
              }
              @Override

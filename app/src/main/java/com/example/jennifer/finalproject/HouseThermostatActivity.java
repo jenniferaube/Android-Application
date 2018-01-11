@@ -1,10 +1,12 @@
 package com.example.jennifer.finalproject;
 
 import android.app.Dialog;
+import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -43,11 +45,14 @@ public class HouseThermostatActivity extends AppCompatActivity {
     ArrayList<String> listType = new ArrayList<>();
     ThermostatAdapter thermostatAdapter;
     ListView listView;
+    Boolean largeScreenCheck;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house_thermostat);
+        largeScreenCheck = findViewById(R.id.frameSW) != null;
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("House Thermostat");
         setSupportActionBar(toolbar);
@@ -161,10 +166,21 @@ public class HouseThermostatActivity extends AppCompatActivity {
                 startActivityForResult(new Intent(HouseThermostatActivity.this, AddActivity.class), 1);
                 return true;
             case R.id.action_instructions:
-                startActivity(new Intent(HouseThermostatActivity.this, InstructionActivity.class));
+                if(largeScreenCheck || getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+                    Log.i("HouseThermostatActivity", "in Tablet View");
+                    InstructionsFragment fragment = new InstructionsFragment();
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.add(R.id.frameSW, fragment).commit();
+                }
+                /*if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+                    Log.i("HouseThermostatActivity", "in Phone landscape View");
+                }*/
+                else {
+                    Log.i("HouseThermostatActivity", "in Phone View");
+                    startActivity(new Intent(HouseThermostatActivity.this, InstructionActivity.class));
+                }
                 return true;
             case R.id.action_help:
-                //dialog notification
                 int version = Database.VERSION_NUM;
                 /*Alert dialog was cited from
                 * https://developer.android.com/guide/topics/ui/dialogs.html*/

@@ -11,7 +11,7 @@
 
     <EditText
         android:id="@+id/temperatureEditView"
-        android:layout_width="275dp"
+        android:layout_width="225dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tempTxtView"
@@ -38,8 +38,9 @@
 
     <TextView
         android:id="@+id/timeTxtView"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/temperatureEditView"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/spinnerEditMode"
         android:layout_marginTop="27dp"
@@ -51,12 +52,23 @@
 
     <Spinner
         android:id="@+id/spinnerEditMode"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/timeTxtView"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="11dp"
         android:entries="@array/dayOfWeek" />
+
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/save" />
+
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -83,20 +95,22 @@
 
 
     <Button
-        android:id="@+id/saveButton"
-        android:layout_width="wrap_content"
-        android:layout_height="75dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:background="@drawable/save" />
-
-
-    <Button
         android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
         android:layout_height="75dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:background="@drawable/delete" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/temperatureEditView">
+
+    </FrameLayout>
 
 </RelativeLayout>
